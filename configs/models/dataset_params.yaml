@@ -1,0 +1,40 @@
+audio_num_mel_bins: 80
+out_dims: 80
+audio_sample_rate: 22050
+hop_size: 256
+win_size: 1024
+fft_size: 1024
+fmin: 0
+fmax: 8000
+f0_min: 80
+f0_max: 800
+num_spk: 1
+mel_vmin: -6
+mel_vmax: 1.5
+loud_norm: false
+raw_data_dir: ""
+processed_data_dir: ""
+binary_data_dir: ""
+preprocess_cls: ""
+binarizer_cls: ""
+preprocess_args:
+  txt_processor: en
+  wav_processors: []
+  save_sil_mask: true
+  vad_max_silence_length: 12
+  with_phsep: true
+  reset_phone_dict: true
+  reset_word_dict: true
+  add_eos_bos: true
+binarization_args:
+  shuffle: false
+  with_wav: false
+  with_spk_embed: false
+  with_linear: false
+  trim_eos_bos: false
+  min_sil_duration: 0.1
+  train_range: [200, -1]
+  test_range: [0, 100]
+  valid_range: [100, 200]
+  trim_long_sil: false
+word_dict_size: 10000

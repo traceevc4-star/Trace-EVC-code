@@ -1,0 +1,40 @@
+work_dir: checkpoints/synthesis
+raw_data_dir: "data/raw/ESD"
+processed_data_dir: data/esd_data/processed
+binary_data_dir: data/esd_data/binary
+preprocess_cls: configs.datasets.esd.preprocess.ESDPreprocess
+
+binarization_args:
+  train_range: [2500, -1]
+  test_range: [0, 1500]
+  valid_range: [1500, 2500]
+test_ids: []
+
+mel_vmin: -9.0314
+mel_vmax: 2.1758
+
+audio_vocoder: speechbrain_hifigan
+sb_vocoder_source: speechbrain/tts-hifigan-libritts-16kHz
+sb_vocoder_savedir: checkpoints/vocoder/tts-hifigan-libritts-16kHz
+vocoder: BigVGAN
+vocoder_ckpt: checkpoints/bigvgan_16k/g_05050000
+vocoder_cls: models.vocoder.bigvgan.BigVGAN
+vocoder_config: configs/models/vocoder/bigvgan16k.yaml
+
+num_spk: 10
+audio_num_mel_bins: 80
+out_dims: 80
+audio_sample_rate: 16000
+hop_size: 256
+win_size: 1024
+fft_size: 1024
+fmin: 0
+fmax: 8000
+f0_min: 80
+f0_max: 800
+
+kmeans_model_path: "./km200.bin"
+hubert_model: "facebook/hubert-base-ls960"
+
+use_spk_encoder: false
+lambda_grl: 0.01

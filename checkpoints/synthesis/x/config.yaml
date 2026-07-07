@@ -1,0 +1,192 @@
+accumulate_grad_batches: 1
+alpha: 0.1
+amp: false
+audio_diffusion_step: 100
+audio_log_interval: 313
+audio_num_mel_bins: 80
+audio_sample_rate: 16000
+audio_vocoder: speechbrain_hifigan
+base_config:
+- configs/models/evc/durflex.yaml
+- configs/datasets/mead/preprocess.yaml
+binarization_args:
+  min_sil_duration: 0.1
+  shuffle: false
+  test_range:
+  - 0
+  - 100
+  train_range:
+  - 200
+  - -1
+  trim_eos_bos: false
+  trim_long_sil: false
+  valid_range:
+  - 100
+  - 200
+  with_align: false
+  with_linear: false
+  with_spk_embed: true
+  with_wav: false
+binarizer_cls: ''
+binary_data_dir: data/features/binary
+check_val_every_n_epoch: 10
+clip_grad_norm: 1
+clip_grad_value: 0
+content_split_utt: 24
+cross_curriculum: false
+dataset_cls: tasks.evc.dataset_utils.DurFlexDataset
+debug: false
+decoder:
+  beta_max: 20.0
+  beta_min: 0.05
+  dim: 128
+  dim_mults:
+  - 1
+  - 2
+  - 4
+  - 8
+  pe_scale: 1000
+  spk_emb_dim: 256
+diffused_emb_path: data/features/diffused/diffused_target_emb.pt
+diffused_item_names_path: data/features/diffused/diffused_items.txt
+diffusion_step: 100
+ds_workers: 0
+ease_dim: 128
+ease_dir: data/speaker/EASE_embeddings
+ease_stats_path: data/speaker/ease_stats.npz
+emo_cond_dim: 1024
+emo_names:
+- angry
+- happy
+- sad
+- surprised
+enc_ffn_kernel_size: 9
+enc_kernel_size: 5
+enc_layers: 4
+endless_ds: true
+energy_gain_db: 8.0
+energy_raw_spk_stats_path: data/features/energy_raw_spk_stats.npz
+energy_utt_stats_path: data/features/energy_raw_utt_stats.npz
+eval_max_batches: -1
+f0_max: 800
+f0_min: 80
+f0_utt_stats_path: data/features/f0_utt_stats.npz
+feature_dims: 768
+ffn_act: gelu
+ffn_hidden_size: 1024
+fft_size: 1024
+filter_unpaired_items: true
+fmax: 8000
+fmin: 0
+frames_multiple: 1
+gen_dir_name: test
+hard_content: false
+hidden_size: 256
+hop_size: 256
+hubert_model: facebook/hubert-base-ls960
+infer: false
+kmeans_model_path: ./km200.bin
+lambda_grl: 0.01
+lambda_mp: 2.0
+lambda_ph_dur: 0.1
+load_ckpt: ''
+loud_norm: false
+lr: 0.0001
+max_epochs: 1000
+max_frames: 1548
+max_input_tokens: 1550
+max_sentences: 48
+max_tokens: 100000000
+max_updates: 500000
+max_valid_sentences: 1
+max_valid_tokens: 60000
+mel_vmax: 2.1758
+mel_vmin: -9.0314
+min_frames: 0
+model_cls: ''
+n_units: 200
+num_ckpt_keep: 1000
+num_heads: 2
+num_sanity_val_steps: 5
+num_spk: 1
+num_valid_plots: 5
+optimizer_adam_beta1: 0.9
+optimizer_adam_beta2: 0.98
+out_dims: 80
+out_wav_norm: false
+plot_f0: false
+preload_content: true
+preprocess_args:
+  add_eos_bos: true
+  reset_phone_dict: true
+  reset_word_dict: true
+  save_sil_mask: true
+  txt_processor: en
+  vad_max_silence_length: 12
+  wav_processors: []
+  with_phsep: true
+preprocess_cls: ''
+print_nan_grads: false
+processed_data_dir: data/features/processed
+profile_infer: false
+raw_data_dir: data/raw/MEAD
+rename_tmux: true
+resume_from_checkpoint: 0
+save_best: true
+save_codes:
+- tasks
+- models
+- configs
+save_f0: false
+save_gt: false
+save_mel_npy: false
+sb_vocoder_savedir: checkpoints/vocoder/tts-hifigan-libritts-16kHz
+sb_vocoder_source: speechbrain/tts-hifigan-libritts-16kHz
+scheduler: warmup
+seed: 1234
+segment_size: 32
+sort_by_len: true
+split_vad_proj: false
+src_feat_type: hubert
+target_levels:
+- 1
+- 2
+- 3
+task_cls: tasks.evc.durflex_evc.DurFlexEVCTask
+tb_log_interval: 100
+test_ids: []
+test_input_yaml: ''
+test_num: 100
+test_set_name: test
+train_set_name: train
+train_sets: ''
+unit_attn_dropout: 0.1
+unit_attn_num_heads: 4
+use_dur_predictor: false
+use_emb_cond: true
+use_energy_cond: false
+use_energy_frame_cond: false
+use_f0_cond: false
+use_int_disentangle: false
+use_mean_prosody: true
+use_mp_supervision: true
+use_pos_embed: true
+use_spk_encoder: false
+use_spk_id: true
+use_wandb: false
+val_check_interval: 5000
+valid_infer_interval: 1000000
+valid_monitor_key: val_loss
+valid_monitor_mode: min
+valid_set_name: valid
+vocoder: BigVGAN
+vocoder_ckpt: checkpoints/bigvgan_16k/g_05050000
+vocoder_cls: models.vocoder.bigvgan.BigVGAN
+vocoder_config: configs/models/vocoder/bigvgan16k.yaml
+wandb_entity: ''
+wandb_project: durflex-evc
+warmup_updates: 4000
+weight_decay: 0
+win_size: 1024
+word_dict_size: 10000
+work_dir: checkpoints/synthesis/x

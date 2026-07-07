@@ -1,0 +1,44 @@
+base_config:
+  - configs/models/evc/durflex.yaml
+  - configs/datasets/mead/preprocess.yaml
+
+use_emb_cond: true
+emo_cond_dim: 1024
+use_mean_prosody: true
+f0_utt_stats_path: data/features/f0_utt_stats.npz
+energy_utt_stats_path: data/features/energy_raw_utt_stats.npz
+energy_raw_spk_stats_path: data/features/energy_raw_spk_stats.npz
+energy_gain_db: 8.0
+
+use_int_disentangle: false
+use_f0_cond: false
+use_energy_frame_cond: false
+hard_content: false
+split_vad_proj: false
+use_energy_cond: false
+cross_curriculum: false
+use_dur_predictor: false
+
+diffused_emb_path: data/features/diffused/diffused_target_emb.pt
+diffused_item_names_path: data/features/diffused/diffused_items.txt
+emo_names: [angry, happy, sad, surprised]
+target_levels: [1, 2, 3]
+filter_unpaired_items: true
+ease_dir: data/speaker/EASE_embeddings
+ease_stats_path: data/speaker/ease_stats.npz
+
+load_ckpt: ""
+lr: 0.0001
+work_dir: checkpoints/synthesis
+num_ckpt_keep: 1000
+use_wandb: false
+val_check_interval: 5000
+valid_infer_interval: 1000000
+max_updates: 500000
+audio_diffusion_step: 100
+num_valid_plots: 5
+ds_workers: 0
+preload_content: true
+content_split_utt: 24
+use_mp_supervision: true
+lambda_mp: 2.0

@@ -1,0 +1,42 @@
+# Pinned to a validated stack. torch>=2.6 flips torch.load(weights_only=True) and
+# torchaudio>=2.7 requires torchcodec; numpy>=2 and transformers>=5 break the
+# framework and the SER trust_remote_code model. Keep these bounds.
+
+# Core
+torch==2.5.1
+torchaudio==2.5.1
+numpy<2
+scipy
+pyyaml
+tqdm
+einops
+packaging
+setuptools<81           # provides pkg_resources (imported by webrtcvad; removed in setuptools>=81)
+
+# Audio / features
+librosa
+soundfile
+numba
+joblib
+pyloudnorm
+webrtcvad
+AMFM-decompy             # pYAAPT F0 extraction (tasks/preprocess/extract_f0.py)
+scikit-image
+pycwt
+
+# Model / training
+pytorch-revgrad          # gradient-reversal layer (speaker adversarial)
+matplotlib               # spectrogram / training plots
+pandas
+textgrid
+chardet
+tensorboard              # training logs
+
+# Speaker / content / vocoder models
+speechbrain              # ECAPA speaker x-vectors, HiFi-GAN vocoder
+transformers==4.46.0     # HuBERT / E5 / Odyssey WavLM VAD (5.x moves PretrainedConfig; 4.5x+ blocks torch<2.6 .bin loads)
+
+# End-to-end source-emotion extraction
+funasr==1.3.9            # emotion2vec utterance embedding
+
+# BigVGAN-v2 (44.1 kHz synthesis path) is vendored under models/vocoder/bigvgan

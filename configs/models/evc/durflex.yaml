@@ -1,0 +1,53 @@
+base_config: configs/models/evc/base.yaml
+task_cls: tasks.evc.durflex_evc.DurFlexEVCTask
+dataset_cls: tasks.evc.dataset_utils.DurFlexDataset
+
+hidden_size: 256
+decoder:
+  dim: 128
+  dim_mults: [1, 2, 4, 8]
+  pe_scale: 1000
+  beta_min: 0.05
+  beta_max: 20.0
+  spk_emb_dim: 256
+
+diffusion_step: 100
+segment_size: 32
+
+enc_layers: 4
+enc_ffn_kernel_size: 9
+num_heads: 2
+ffn_act: gelu
+ffn_hidden_size: 1024
+use_pos_embed: true
+enc_kernel_size: 5
+
+unit_attn_num_heads: 4
+unit_attn_dropout: 0.1
+
+feature_dims: 768
+src_feat_type: hubert
+n_units: 200
+
+use_spk_id: true
+
+ease_dim: 128
+ease_dir: data/speaker/EASE_embeddings
+ease_stats_path: data/speaker/ease_stats.npz
+
+use_wandb: true
+wandb_project: durflex-evc
+wandb_entity: ""
+audio_log_interval: 313
+audio_diffusion_step: 100
+
+num_ckpt_keep: 5
+
+alpha: 0.1
+lambda_grl: 0.01
+
+lr: 0.0001
+max_sentences: 48
+max_updates: 500000
+
+lambda_ph_dur: 0.1
